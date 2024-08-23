@@ -4,9 +4,9 @@ import 'package:instagram/widgets/button.dart';
 // Scaffold [x]
 // Column [x]
 // Text [x]
-// Image
-// Text
-// Buttons 2 - FilledButton - TextButton
+// Image [x]
+// Text [x]
+// Buttons 2 - FilledButton - TextButton [x]
 // BottomNavigationBar
 class AuthorizationScreen extends StatelessWidget {
   const AuthorizationScreen({super.key});
@@ -54,11 +54,40 @@ class AuthorizationScreen extends StatelessWidget {
             /// 1. Image
             ///   assets - imagenes en los assets
             ///   network - url
-            const Image(
-              image: AssetImage('assets/avatars/1.png'),
-              height: 85,
-              width: 85,
+            const ClipOval(
+              child: Image(
+                image: AssetImage('assets/avatars/1.png'),
+                height: 85,
+                width: 85,
+              ),
             ),
+
+            /// ClipOval
+            // const ClipOval(
+            //   child: Image(
+            //     image: AssetImage('assets/images/post.png'),
+            //     height: 85,
+            //     width: 85,
+            //   ),
+            // ),
+            /// ClipRRect
+            // ClipRRect(
+            //   /// Solo en el top izquierdo se coloca un radio
+            //   // borderRadius: BorderRadius.only(
+            //   //   topLeft: Radius.circular(10)
+            //   // ),
+            //   borderRadius: BorderRadius.circular(100),
+            //   child: const Image(
+            //     image: AssetImage('assets/images/post.png'),
+            //     height: 85,
+            //     width: 85,
+            //   ),
+            // ),
+            /// Avatar
+            // const CircleAvatar(
+            //   backgroundImage: AssetImage('assets/images/post.png'),
+            //   radius: 42.5,
+            // ),
 
             /// Widget 4
             /// SizedBox
@@ -66,7 +95,10 @@ class AuthorizationScreen extends StatelessWidget {
 
             /// Widget 5
             /// Text
-            const Text('richar293'),
+            const Text(
+              'richar293',
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
 
             /// Widget 6
             /// SizedBox
@@ -83,9 +115,63 @@ class AuthorizationScreen extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
-            
+
             /// TextButton
+            TextButton(
+              onPressed: () {},
+
+              /// Otra forma WidgetStatePropertyAll()
+              // style: ButtonStyle(
+              //   foregroundColor: WidgetStateProperty.all(Colors.yellow),
+              // ),
+              child: const Text(
+                "Switch accounts",
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
           ],
+        ),
+      ),
+
+      /// SafeArea -> Area de seguridad para que los widgets no desaparezcan
+      /// distribución de los dispositivos
+      /// 1. Container
+      /// 2. Text
+      /// 3. Button - GestureDetector
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            border: Border(
+                top: BorderSide(
+              color: Colors.grey,
+              width: 1,
+            )),
+          ),
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Dont't have an account? ",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 14,
+                ),
+              ),
+              GestureDetector(
+                /// onTap: Detecta un click o un tap simple
+                onTap: () {
+                  print("Sing Up"); // flutter logs
+                },
+                child: const Text(
+                  "Sign up",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
