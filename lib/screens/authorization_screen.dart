@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram/screens/login_screen.dart';
 import 'package:instagram/widgets/button.dart';
 
 // Scaffold [x]
@@ -10,6 +12,10 @@ import 'package:instagram/widgets/button.dart';
 // BottomNavigationBar
 class AuthorizationScreen extends StatelessWidget {
   const AuthorizationScreen({super.key});
+
+  /// Siempre colocar esto -> poder interpretar que es un screen y
+  /// no un widget
+  static String routeName = 'authorization-screen';
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +29,27 @@ class AuthorizationScreen extends StatelessWidget {
           children: [
             /// Widget 1
             /// Text -> nos sirve para renderizar un texto
-            const Text(
-              "Instagram",
+            // const Text(
+            //   "Instagram",
 
-              /// style es la propiedad que nos permite actualizar los estilos del texto
-              style: TextStyle(
-                /// fontSize: tamaño del texto
-                fontSize: 50,
+            //   /// style es la propiedad que nos permite actualizar los estilos del texto
+            //   style: TextStyle(
+            //     /// fontSize: tamaño del texto
+            //     fontSize: 50,
 
-                /// fontWeight: peso de la fuente
-                fontWeight: FontWeight.w500,
+            //     /// fontWeight: peso de la fuente
+            //     fontWeight: FontWeight.w500,
 
-                /// color
-                color: Colors.black,
-              ),
+            //     /// color
+            //     color: Colors.black,
+            //   ),
+            // ),
+
+            SvgPicture.asset(
+              "assets/svg/instagram_logo.svg",
+              // Esto sirve para cambiar el color del svg
+              // colorFilter: const ColorFilter.mode(Color.fromARGB(255, 234, 196, 193), BlendMode.srcIn),
+              semanticsLabel: 'Instagram',
             ),
 
             /// Widget 2
@@ -118,7 +131,26 @@ class AuthorizationScreen extends StatelessWidget {
 
             /// TextButton
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                /// Navigator - estrategia 1
+                /// Push
+                /// A - B -> Pero la pantalla A se queda en el stack
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const LoginScreen(),
+                //   ),
+                // );
+                /// pushNamed -> Navegación por nombre
+                Navigator.pushNamed(context, LoginScreen.routeName);
+
+                /// Reemplazar el pushNamed
+                /// Navigator.pushReplacementNamed(context, routeName);
+                /// 1. Qué cambio en el stack.
+                /// 2. Qué paso con el appbar.
+                /// 3. Como podría regresar a la pantalla anterior. Authorization screen
+
+              },
 
               /// Otra forma WidgetStatePropertyAll()
               // style: ButtonStyle(
