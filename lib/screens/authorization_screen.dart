@@ -189,4 +189,3 @@ class AuthorizationScreen extends StatelessWidget {
     );
   }
 }
-

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-
 class Footer extends StatelessWidget {
   const Footer({
     super.key,
     required this.child,
   });
-
   final Widget child;
-
   @override
   Widget build(BuildContext context) {
     /// SafeArea -> Area de seguridad para que los widgets no desaparezcan
@@ -26,6 +23,7 @@ class Footer extends StatelessWidget {
         ),
         height: 50,
         child: child,
+        
       ),
     );
   }
