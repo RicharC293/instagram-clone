@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/widgets/button.dart';
 import 'package:instagram/widgets/instagram_logo.dart';
@@ -164,15 +165,22 @@ class _LoginScreenState extends State<LoginScreen> {
             /// Hola **pepito** como estas
             /// Text - TextSpan
             RichText(
-              text: const TextSpan(
-                text: "Hola",
+              text: TextSpan(
+                text: "Don't have an account? ",
+                style: const TextStyle(color: Colors.grey),
                 children: [
                     TextSpan(
-                      text: "pepito"
+                      text: "Sign up.",
+                      style: const TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()..onTap = () {
+                        /// A EJECUTAR
+                        print("Redirection");
+                      },
                     ),
-                    TextSpan(
-                      text: "como estas"
-                    ),
+                    // TextSpan(
+                    //   text: " como estas",
+                    //   style: TextStyle(color: Colors.red),
+                    // ),
                 ],
               ),
             ),

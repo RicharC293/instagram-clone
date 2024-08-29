@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/screens/login_screen.dart';
 import 'package:instagram/widgets/button.dart';
+import 'package:instagram/widgets/footer.dart';
 import 'package:instagram/widgets/instagram_logo.dart';
 
 // Scaffold [x]
@@ -144,7 +145,6 @@ class AuthorizationScreen extends StatelessWidget {
                 /// 1. Qué cambio en el stack.
                 /// 2. Qué paso con el appbar.
                 /// 3. Como podría regresar a la pantalla anterior. Authorization screen
-
               },
 
               /// Otra forma WidgetStatePropertyAll()
@@ -160,47 +160,33 @@ class AuthorizationScreen extends StatelessWidget {
         ),
       ),
 
-      /// SafeArea -> Area de seguridad para que los widgets no desaparezcan
-      /// distribución de los dispositivos
-      /// 1. Container
-      /// 2. Text
-      /// 3. Button - GestureDetector
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            border: Border(
-                top: BorderSide(
-              color: Colors.grey,
-              width: 1,
-            )),
-          ),
-          height: 50,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Dont't have an account? ",
+      bottomNavigationBar: Footer(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Dont't have an account? ",
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14,
+              ),
+            ),
+            GestureDetector(
+              /// onTap: Detecta un click o un tap simple
+              onTap: () {
+                print("Sing Up"); // flutter logs
+              },
+              child: const Text(
+                "Sign up",
                 style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              GestureDetector(
-                /// onTap: Detecta un click o un tap simple
-                onTap: () {
-                  print("Sing Up"); // flutter logs
-                },
-                child: const Text(
-                  "Sign up",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
