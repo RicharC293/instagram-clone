@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:instagram/screens/home_screen.dart';
 import 'package:instagram/widgets/button.dart';
 import 'package:instagram/widgets/footer.dart';
 import 'package:instagram/widgets/instagram_logo.dart';
@@ -41,30 +42,31 @@ class _LoginScreenState extends State<LoginScreen> {
           // EdgeInsets.only() -> padding en una esquina - nos permite darles diferente valor
           // EdgeInsets.symmetric() -> padding horizontal y vertical
           padding: const EdgeInsets.all(16),
-          /// Column debe ser de tipo scrolleable para remover el error 
+
+          /// Column debe ser de tipo scrolleable para remover el error
           /// de overflow
           /// SingleChildScrollView
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-            
+
               /// Es una lista de widgets
               children: [
                 // SizedBox -> separar
                 const SizedBox(height: 40),
-            
+
                 /// Extraer widgets
                 /// - Para reutilizar código
                 /// - Para evitar importaciones
                 /// - Para darle la posibilidad de declarar el widget como const (performance)
                 const Center(child: InstagramLogo()),
-            
+
                 // SizedBox -> separar
                 const SizedBox(height: 40),
-            
+
                 /// Formulario - TextField - TextFormField
                 /// TextFormField -> debe estar dentro de un Form
-            
+
                 TextFormField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -72,18 +74,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'test@test.com',
                     labelText: 'Correo electrónico',
                   ),
-            
+
                   /// Definir el tipo de teclado
                   keyboardType: TextInputType.emailAddress,
-            
+
                   onChanged: (String value) {
                     _email = value;
                   },
-            
+
                   onSaved: (newValue) {
                     _email = newValue ?? '';
                   },
-            
+
                   validator: (value) {
                     //1. si está vacío retorna un mensaje de Requerido
                     if (value == null || value.isEmpty) {
@@ -93,20 +95,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (!value.contains('@')) {
                       return "Ingresa un email";
                     }
-            
+
                     /// Regex
                     // if(!value.contains(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")))
-            
+
                     // 3. permitele avanzar
                     return null;
                   },
-            
+
                   /// Formatos de entrada
                   // inputFormatters: [
                   //   FilteringTextInputFormatter.digitsOnly,
                   // ],
                 ),
-            
+
                 /// SizedBox
                 const SizedBox(height: 10),
                 TextFormField(
@@ -141,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-            
+
                 /// Text button forgot password
                 /// Align -> alinear widgets con respecto al padre
                 Align(
@@ -154,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-            
+
                 /// Botón Log in
                 SizedBox(
                   width: double.infinity,
@@ -170,15 +172,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         // esto se ejecuta se llama un servicio y se loguea
                         print("EMAIL: $_email");
                         print("PASSWORD: $_password");
-                      
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          HomeScreen.routeName,
+                          (route) => false,
+                        );
                       }
                     },
                   ),
                 ),
-            
+
                 /// Espacio
                 const SizedBox(height: 20),
-            
+
                 /// Login facebook
                 GestureDetector(
                   onTap: () {},
@@ -192,10 +198,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 17,
                         width: 17,
                       ),
-            
+
                       /// SizedBox
                       const SizedBox(width: 10),
-            
+
                       /// Text
                       const Text(
                         'Log in with Facebook',
@@ -204,7 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-            
+
                 /// Divider
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,19 +221,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 132,
                       child: Divider(height: 100),
                     ),
-            
+
                     Text(
                       "OR",
                       style: TextStyle(color: Colors.grey),
                     ),
-            
+
                     SizedBox(
                       width: 132,
                       child: Divider(height: 100),
                     ),
                   ],
                 ),
-            
+
                 /// Don't have accout
                 /// RichText -> varios estilos al texto
                 /// Hola **pepito** como estas

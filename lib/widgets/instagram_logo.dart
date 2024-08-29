@@ -3,8 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class InstagramLogo extends StatelessWidget {
   const InstagramLogo({
-    super.key,
+    super.key, this.height,
   });
+
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class InstagramLogo extends StatelessWidget {
       // Esto sirve para cambiar el color del svg
       // colorFilter: const ColorFilter.mode(Color.fromARGB(255, 234, 196, 193), BlendMode.srcIn),
       semanticsLabel: 'Instagram',
+      height: height,
     );
   }
 }
