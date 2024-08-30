@@ -37,12 +37,65 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          FilledButton(
-            onPressed: () async {
-              final data = await Services().getAllCharacters();
-              print(data);
+          FutureBuilder(
+            future: Services().getAllCharacters(),
+            builder: (context, snapshot) {
+              /// Como mostrar un loading
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child:  CircularProgressIndicator());
+              }
+
+              /// Controlar el request
+              /// ListView.builder renderizar desde una lista de elementos
+              if (snapshot.hasData) {
+                return SizedBox(
+                  height: 100,
+                  child: ListView.builder(
+                    /// dirección - Vertical - Horizontal
+                    scrollDirection: Axis.horizontal,
+
+                    /// itemBuilder
+                    itemBuilder: (context, index) {
+                      /// index -> define la posición del elemento en la lista
+                      /// data[index].image -> imagen es una url - imagen remota
+                      final data = snapshot.data!.results;
+                      return Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.all(0.5),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.red, width: 3),
+                              borderRadius: BorderRadius.circular(200),
+                            ),
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(data[index].image),
+                              radius: 30,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          SizedBox(
+                            width: 70,
+                            child: Text(
+                              data[index].name,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                fontSize: 9,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+
+                    /// itemCount -> lenght
+                    itemCount: snapshot.data!.results.length,
+                  ),
+                );
+              }
+
+              return Text("Ha ocurrido un error");
             },
-            child: const Text('Servicio'),
           ),
         ],
       ),
