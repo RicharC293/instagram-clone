@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: const Color(0xffFAFAFA),
         actions: [
           IconButton(
-            icon: const Icon(CupertinoIcons.chat_bubble_text),
+            icon: const Icon(CupertinoIcons.plus_bubble),
             onPressed: () {},
           ),
         ],
