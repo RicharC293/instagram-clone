@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/screens/home_screen.dart';
 import 'package:instagram/screens/login_screen.dart';
 import 'package:instagram/widgets/button.dart';
 import 'package:instagram/widgets/footer.dart';
@@ -121,7 +122,11 @@ class AuthorizationScreen extends StatelessWidget {
               height: 44,
               child: Button(
                 text: 'Log in',
-                onPressed: () {},
+                onPressed: () {
+                  // push : |authorization| -> |HomeScreen|
+                  // pushReplacement: |HomeScreen|
+                  Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                },
               ),
             ),
 

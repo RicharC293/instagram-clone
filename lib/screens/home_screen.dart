@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram/services/services.dart';
 import 'package:instagram/widgets/instagram_logo.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,13 +10,23 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final email = (ModalRoute.of(context)?.settings.arguments)?.toString();
     return Scaffold(
       appBar: AppBar(
+        // Widget que indica un icono o botón al lado izquierdo
+        // Automaticamente la flecha de atrás - maneja automaticamente
         leading: IconButton(
           icon: const Icon(CupertinoIcons.camera),
           onPressed: () {},
         ),
         title: const InstagramLogo(height: 30),
+        // title: Text(email ?? 'null'),
+        centerTitle: true,
+
+        /// Color hexadecimal
+        /// Color -> Decir que necesitas un color
+        /// 0xff -> Opacidad
+        /// FAFAFA -> clave del color
         backgroundColor: const Color(0xffFAFAFA),
         actions: [
           IconButton(
@@ -24,9 +35,19 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Placeholder(),
+      body: Column(
+        children: [
+          FilledButton(
+            onPressed: () async {
+              final data = await Services().getAllCharacters();
+              print(data);
+            },
+            child: const Text('Servicio'),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: 24,
+        // iconSize: 24,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
         selectedFontSize: 0,
@@ -34,6 +55,10 @@ class HomeScreen extends StatelessWidget {
         onTap: (value) {
           /// On tap retorna el indice del item que se seleccionó
           print(value);
+          //0
+          //1
+          //2
+          // if - switch
         },
         items: const [
           BottomNavigationBarItem(

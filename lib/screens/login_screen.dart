@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     _password = value;
                   },
                   onSaved: (newValue) {
-                    _email = newValue ?? '';
+                    _password = newValue ?? '';
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -172,10 +172,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         // esto se ejecuta se llama un servicio y se loguea
                         print("EMAIL: $_email");
                         print("PASSWORD: $_password");
+                        /// JWT -> secureStorage
+                        // Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+
+                        /// predicate
+                        /// callback que tiene un argumento que se llama route
+                        /// route -> cada una de las rutas del stack
                         Navigator.pushNamedAndRemoveUntil(
                           context,
                           HomeScreen.routeName,
                           (route) => false,
+                          arguments: _email,
                         );
                       }
                     },
